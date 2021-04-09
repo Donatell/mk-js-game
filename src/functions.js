@@ -31,7 +31,7 @@ const createPlayer = (player) => {
 
 	const $image = createElement('img');
 	$image.src =
-		`http://reactmarathon-api.herokuapp.com/assets/${player.name}.gif`;
+		`https://reactmarathon-api.herokuapp.com/assets/${player.name}.gif`;
 
 	$progressBar.appendChild($hp);
 	$progressBar.appendChild($hpcount);
