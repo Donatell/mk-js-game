@@ -5,7 +5,6 @@ populateArena(player1, player2);
 
 $randomButton.addEventListener('click', () => {
 	const targetPlayerNumber = Math.floor(Math.random() * 2) + 1;
-	console.log(targetPlayerNumber);
 
 	const player = targetPlayerNumber === 1 ? player1 : player2;
 	changeHP(player);
