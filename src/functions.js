@@ -1,49 +1,56 @@
-const createPlayer = (player, playerData) => {
-    const $player = document.createElement('div');
-    $player.classList.add(player);
+const createElement = (tag, className, innerText) => {
+	const $tag = document.createElement(tag);
 
-    const $progressBar = document.createElement('div');
-    $progressBar.classList.add('progressbar');
+	if (className) {
+		$tag.classList.add(className);
+	}
 
-    const $life = document.createElement('div');
-    $life.classList.add('life');
-    $life.innerText = playerData.hp;
-    $life.style.width = '100%';
+	if (innerText) {
+		$tag.innerText = innerText;
+	}
 
-    const $name = document.createElement('div');
-    $name.classList.add('name');
-    $name.innerText = playerData.displayName.toUpperCase();
+	return $tag;
+};
 
-    const $character = document.createElement('div');
-    $character.classList.add('character');
+const createPlayer = (player) => {
+	const $player = createElement('div', 'player' + player.player);
+	const $progressBar = createElement('div', 'progressbar');
 
-    const $image = document.createElement('img');
-    $image.src =
-        `http://reactmarathon-api.herokuapp.com/assets/${playerData.name}.gif`;
+	const $life = createElement('div', 'life', player.hp);
+	$life.style.width = '100%';
 
-    $progressBar.appendChild($life);
-    $progressBar.appendChild($name);
+	const $name = createElement('div', 'name',
+		player.displayName.toUpperCase());
 
-    $character.appendChild($image);
+	const $character = createElement('div', 'character');
 
-    $player.appendChild($progressBar);
-    $player.appendChild($character);
+	const $image = createElement('img');
+	$image.src =
+		`http://reactmarathon-api.herokuapp.com/assets/${player.name}.gif`;
 
-    return $player;
+	$progressBar.appendChild($life);
+	$progressBar.appendChild($name);
+
+	$character.appendChild($image);
+
+	$player.appendChild($progressBar);
+	$player.appendChild($character);
+
+	return $player;
 };
 
 const populateArena = (player1, player2) => {
 
-    const $player1 = createPlayer('player1', player1);
-    const $player2 = createPlayer('player2', player2);
+	const $player1 = createPlayer(player1);
+	const $player2 = createPlayer(player2);
 
-    const $arenas = document.querySelector('.arenas');
-    $arenas.appendChild($player1);
-    $arenas.appendChild($player2);
+	const $arenas = document.querySelector('.arenas');
+	$arenas.appendChild($player1);
+	$arenas.appendChild($player2);
 
-    console.log('populated');
+	console.log('populated');
 };
 
 export {
-    populateArena
+	populateArena
 };
