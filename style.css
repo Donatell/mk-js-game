@@ -242,7 +242,7 @@ body {
     display: block;
     position: relative;
     padding: 0 16px;
-    height: 36px;
+    height: 46px;
     color: white;
     font-size: 18px;
     text-transform: uppercase;
@@ -282,6 +282,11 @@ body {
     top: 1px;
     }
 
+#randomHit {
+    margin-left: 5px;
+    margin-right: 5px;
+    }
+
 .winBanner {
     position: absolute;
     top: 25%;
@@ -292,4 +297,17 @@ body {
     z-index: 1000;
     color: white;
     font-family: "Mortal Kombat 3", serif;
+    }
+
+/* Reload Button */
+.reloadWrap {
+    position: absolute;
+    top: 10%;
+    z-index: 1000;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    }
+
+.reloadWrap .button {
+    margin-top: 0;
     }
