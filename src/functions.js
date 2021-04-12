@@ -1,5 +1,8 @@
 const $arenas = document.querySelector('.arenas');
-const $randomButton = document.querySelector('.button');
+const $randomButton = document.querySelector('#randomHit');
+const $player1Button = document.querySelector('#player1hit');
+const $player2Button = document.querySelector('#player2hit');
+const $control = document.querySelector('.control');
 
 const createElement = (tag, className, innerText) => {
 	const $tag = document.createElement(tag);
@@ -14,6 +17,17 @@ const createElement = (tag, className, innerText) => {
 
 	return $tag;
 };
+
+function createReloadButton() {
+	const $reloadWrap = createElement('div', 'reloadWrap');
+
+	const $reloadButton = createElement('button', 'button', 'Restart');
+	$reloadButton.addEventListener('click', () => window.location.reload());
+
+	$reloadWrap.appendChild($reloadButton);
+
+	$arenas.appendChild($reloadWrap);
+}
 
 const createPlayer = (player) => {
 	const $player = createElement('div', 'player' + player.player);
@@ -54,45 +68,13 @@ const populateArena = (player1, player2) => {
 	$arenas.appendChild($player2);
 };
 
-function handleWin(lostPlayerNumber) {
-	const $winBanner = createElement('div', 'winBanner');
-
-	const winPlayerNumber = lostPlayerNumber === 1 ? 2 : 1;
-	const $winPlayer = document.querySelector(
-		'.player' + winPlayerNumber + ' .progressbar .name');
-	const winPlayerName = $winPlayer.innerText;
-
-	$winBanner.innerText = winPlayerName + ' wins!';
-
-	$randomButton.style.display = 'none';
-	$arenas.appendChild($winBanner);
-}
-
-const changeHP = (player) => {
-	const damage = Math.floor(Math.random() * 20) + 1;
-
-	player.hp -= damage;
-
-	if (player.hp <= 0) {
-		player.hp = 0;
-	}
-
-	const $playerHP = document.querySelector(
-		'.player' + player.player + ' .progressbar .hp');
-	const $playerHPCount = document.querySelector(
-		'.player' + player.player + ' .progressbar .hpcount');
-
-	$playerHP.style.width = player.hp + '%';
-	$playerHPCount.innerText = player.hp;
-
-	if (player.hp === 0) {
-		handleWin(player.player);
-	}
-};
-
 export {
 	populateArena,
-	changeHP,
+	createElement,
+	createReloadButton,
 	$arenas,
-	$randomButton
+	$randomButton,
+	$player1Button,
+	$player2Button,
+	$control
 };
