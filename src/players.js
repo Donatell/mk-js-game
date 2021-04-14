@@ -78,6 +78,8 @@ function attack($fightForm) {
 		if (item.checked && item.name === 'defence') {
 			playerAction.defenceTarget = item.value;
 		}
+
+		item.checked = false;
 	}
 
 	fight(playerAction);
