@@ -1,6 +1,5 @@
 import {
-	$arenas, $fightForm, createElement, createReloadButton, fight, getRandom,
-	TARGET_DAMAGE
+	$arenas, $fightForm, createElement, createReloadButton
 } from './functions.js';
 
 // Player declaration
@@ -11,7 +10,6 @@ const player1 = {
 	hp: 100,
 	img: '',
 	weapon: ['Kori Blade', 'Ice Daggers'],
-	attack,
 	getDamage,
 	changeHP,
 	getPlayerHPElements,
@@ -27,7 +25,6 @@ const player2 = {
 	hp: 100,
 	img: '',
 	weapon: ['Kunai', 'Katana'],
-	attack,
 	getDamage,
 	changeHP,
 	getPlayerHPElements,
@@ -59,30 +56,6 @@ function renderHP() {
 
 	$playerHP.style.width = this.hp + '%';
 	$playerHPCount.innerText = this.hp;
-}
-
-function attack($fightForm) {
-	const playerAction = {};
-
-	// Read form input
-	for (let item of $fightForm) {
-
-		// Check for attack radio input
-		if (item.checked && item.name === 'hit') {
-			playerAction.hitTarget = item.value;
-			playerAction.damage =
-				getRandom(TARGET_DAMAGE[playerAction.hitTarget]);
-		}
-
-		// Check for defence radio input
-		if (item.checked && item.name === 'defence') {
-			playerAction.defenceTarget = item.value;
-		}
-
-		item.checked = false;
-	}
-
-	fight(playerAction);
 }
 
 function handleLose() {
@@ -128,6 +101,5 @@ export {
 	getPlayerHPElements,
 	renderHP,
 	handleLose,
-	handleDraw,
-	attack
+	handleDraw
 };

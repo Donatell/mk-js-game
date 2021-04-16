@@ -1,11 +1,11 @@
-import { $fightForm, populateArena } from './src/functions.js';
+import { $fightForm, attack, populateArena } from './src/functions.js';
 import { player1, player2 } from './src/players.js';
 
 populateArena(player1, player2);
 
 $fightForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	player1.attack($fightForm);
+	attack($fightForm);
 });
 
 // $randomButton.addEventListener('click', () => {

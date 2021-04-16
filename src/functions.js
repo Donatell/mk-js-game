@@ -92,6 +92,30 @@ function enemyAttack() {
 	};
 }
 
+function attack($fightForm) {
+	const playerAction = {};
+
+	// Read form input
+	for (let item of $fightForm) {
+
+		// Check for attack radio input
+		if (item.checked && item.name === 'hit') {
+			playerAction.hitTarget = item.value;
+			playerAction.damage =
+				getRandom(TARGET_DAMAGE[playerAction.hitTarget]);
+		}
+
+		// Check for defence radio input
+		if (item.checked && item.name === 'defence') {
+			playerAction.defenceTarget = item.value;
+		}
+
+		item.checked = false;
+	}
+
+	fight(playerAction);
+}
+
 function fight(playerAction) {
 	const enemyAction = enemyAttack();
 
@@ -135,6 +159,7 @@ export {
 	createReloadButton,
 	getRandom,
 	fight,
+	attack,
 	$arenas,
 	$fightForm,
 	TARGET,
