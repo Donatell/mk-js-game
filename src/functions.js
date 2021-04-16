@@ -1,8 +1,21 @@
+import { handleDraw, player1, player2 } from './players.js';
+
 const $arenas = document.querySelector('.arenas');
-const $randomButton = document.querySelector('#randomHit');
-const $player1Button = document.querySelector('#player1hit');
-const $player2Button = document.querySelector('#player2hit');
-const $control = document.querySelector('.control');
+const $fightForm = document.querySelector('.control');
+
+// const $randomButton = document.querySelector('#randomHit');
+
+const TARGET = ['head', 'body', 'legs'];
+
+const TARGET_DAMAGE = {
+	head: 30,
+	body: 25,
+	legs: 20
+};
+
+function getRandom(max) {
+	return Math.floor(Math.random() * max) + 1;
+}
 
 const createElement = (tag, className, innerText) => {
 	const $tag = document.createElement(tag);
@@ -34,7 +47,7 @@ const createPlayer = (player) => {
 	const $progressBar = createElement('div', 'progressbar');
 
 	const $hp = createElement('div', 'hp');
-	$hp.style.width = '100%';
+	$hp.style.width = player.hp + '%';
 
 	const $hpcount = createElement('div', 'hpcount', player.hp);
 
@@ -68,13 +81,88 @@ const populateArena = (player1, player2) => {
 	$arenas.appendChild($player2);
 };
 
+function enemyAttack() {
+	const hitTarget = TARGET[getRandom(3) - 1];
+	const defenceTarget = TARGET[getRandom(3) - 1];
+
+	return {
+		damage: getRandom(TARGET_DAMAGE[hitTarget]),
+		hitTarget,
+		defenceTarget
+	};
+}
+
+function attack($fightForm) {
+	const playerAction = {};
+
+	// Read form input
+	for (let item of $fightForm) {
+
+		// Check for attack radio input
+		if (item.checked && item.name === 'hit') {
+			playerAction.hitTarget = item.value;
+			playerAction.damage =
+				getRandom(TARGET_DAMAGE[playerAction.hitTarget]);
+		}
+
+		// Check for defence radio input
+		if (item.checked && item.name === 'defence') {
+			playerAction.defenceTarget = item.value;
+		}
+
+		item.checked = false;
+	}
+
+	fight(playerAction);
+}
+
+function fight(playerAction) {
+	const enemyAction = enemyAttack();
+
+	const $player1HPCount = document.querySelector('.player1 .progressbar' +
+		' .hpcount');
+	const $player2HPCount = document.querySelector('.player1 .progressbar' +
+		' .hpcount');
+
+	const player1HP = $player1HPCount.innerText;
+	const player2HP = $player2HPCount.innerText;
+
+	// Check enemy defence
+	if (playerAction.hitTarget === enemyAction.defenceTarget) {
+		playerAction.damage = 0;
+	}
+
+	// Check player defence
+	if (enemyAction.hitTarget === playerAction.defenceTarget) {
+		enemyAction.damage = 0;
+	}
+
+	if (player1HP - enemyAction.damage <= 0 && player2HP -
+		playerAction.damage <= 0) {
+
+		player1.changeHP(enemyAction.damage);
+		player2.changeHP(playerAction.damage);
+
+		player1.renderHP();
+		player2.renderHP();
+		handleDraw();
+	} else {
+		player2.getDamage(playerAction.damage);
+		player1.getDamage(enemyAction.damage);
+	}
+
+}
+
 export {
 	populateArena,
 	createElement,
 	createReloadButton,
+	getRandom,
+	fight,
+	attack,
 	$arenas,
-	$randomButton,
-	$player1Button,
-	$player2Button,
-	$control
+	$fightForm,
+	TARGET,
+	TARGET_DAMAGE
+	// $randomButton
 };

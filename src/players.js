@@ -1,5 +1,5 @@
 import {
-	$arenas, $control, createElement, createReloadButton
+	$arenas, $fightForm, createElement, createReloadButton
 } from './functions.js';
 
 // Player declaration
@@ -10,11 +10,7 @@ const player1 = {
 	hp: 100,
 	img: '',
 	weapon: ['Kori Blade', 'Ice Daggers'],
-	attack: function () {
-		console.log(`${this.name} attacks`);
-	},
 	getDamage,
-	dealDamage,
 	changeHP,
 	getPlayerHPElements,
 	renderHP,
@@ -29,16 +25,14 @@ const player2 = {
 	hp: 100,
 	img: '',
 	weapon: ['Kunai', 'Katana'],
-	attack: function () {
-		console.log(`${this.name} attacks`);
-	},
 	getDamage,
-	dealDamage,
 	changeHP,
 	getPlayerHPElements,
 	renderHP,
 	handleLose
 };
+
+// Player methods
 
 function changeHP(damage) {
 	this.hp -= damage;
@@ -48,7 +42,6 @@ function changeHP(damage) {
 	}
 }
 
-// Player methods
 function getPlayerHPElements() {
 	const $playerHP = document.querySelector(
 		'.player' + this.player + ' .progressbar .hp');
@@ -65,10 +58,6 @@ function renderHP() {
 	$playerHPCount.innerText = this.hp;
 }
 
-function dealDamage(damage) {
-	this.player === 1 ? player2.getDamage(damage) : player1.getDamage(damage);
-}
-
 function handleLose() {
 	const enemyNumber = this.player === 1 ? 2 : 1;
 
@@ -78,8 +67,19 @@ function handleLose() {
 	const winPlayerName = $winPlayer.innerText;
 	$winBanner.innerText = winPlayerName + ' wins!';
 
-	$control.style.display = 'none';
+	$fightForm.style.display = 'none';
 	$arenas.appendChild($winBanner);
+
+	createReloadButton();
+}
+
+function handleDraw() {
+
+	const $drawBanner = createElement('div', 'winBanner');
+	$drawBanner.innerText = 'draw';
+
+	$fightForm.style.display = 'none';
+	$arenas.appendChild($drawBanner);
 
 	createReloadButton();
 }
@@ -100,5 +100,6 @@ export {
 	changeHP,
 	getPlayerHPElements,
 	renderHP,
-	handleLose
+	handleLose,
+	handleDraw
 };
