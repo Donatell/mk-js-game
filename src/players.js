@@ -87,10 +87,6 @@ function handleDraw() {
 function getDamage(damage) {
 	this.changeHP(damage);
 	this.renderHP();
-
-	if (this.hp === 0) {
-		this.handleLose();
-	}
 }
 
 export {

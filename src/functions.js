@@ -1,3 +1,4 @@
+import { generateFightLog, generateResultLog } from './logs.js';
 import { handleDraw, player1, player2 } from './players.js';
 
 const $arenas = document.querySelector('.arenas');
@@ -92,7 +93,7 @@ function enemyAttack() {
 	};
 }
 
-function attack($fightForm) {
+function playerAttack() {
 	const playerAction = {};
 
 	// Read form input
@@ -113,11 +114,12 @@ function attack($fightForm) {
 		item.checked = false;
 	}
 
-	fight(playerAction);
+	return playerAction;
 }
 
-function fight(playerAction) {
+function fight() {
 	const enemyAction = enemyAttack();
+	const playerAction = playerAttack();
 
 	const $player1HPCount = document.querySelector('.player1 .progressbar' +
 		' .hpcount');
@@ -129,11 +131,12 @@ function fight(playerAction) {
 
 	// Check enemy defence
 	if (playerAction.hitTarget === enemyAction.defenceTarget) {
+		generateFightLog('defence', player1, player2);
 		playerAction.damage = 0;
 	}
-
 	// Check player defence
 	if (enemyAction.hitTarget === playerAction.defenceTarget) {
+		generateFightLog('defence', player2, player1);
 		enemyAction.damage = 0;
 	}
 
@@ -146,9 +149,27 @@ function fight(playerAction) {
 		player1.renderHP();
 		player2.renderHP();
 		handleDraw();
+		generateResultLog(true);
 	} else {
 		player2.getDamage(playerAction.damage);
+		if (playerAction.damage !== 0) {
+			generateFightLog('hit', player1, player2,
+				playerAction.damage);
+		}
+		if (player2.hp === 0) {
+			player2.handleLose();
+			generateResultLog(false, true);
+		}
+
 		player1.getDamage(enemyAction.damage);
+		if (enemyAction.damage !== 0) {
+			generateFightLog('hit', player2, player1,
+				enemyAction.damage);
+		}
+		if (player1.hp === 0) {
+			player1.handleLose();
+			generateResultLog(false, false);
+		}
 	}
 
 }
@@ -159,10 +180,8 @@ export {
 	createReloadButton,
 	getRandom,
 	fight,
-	attack,
 	$arenas,
 	$fightForm,
 	TARGET,
 	TARGET_DAMAGE
-	// $randomButton
 };
