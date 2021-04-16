@@ -4,8 +4,6 @@ import { handleDraw, player1, player2 } from './players.js';
 const $arenas = document.querySelector('.arenas');
 const $fightForm = document.querySelector('.control');
 
-// const $randomButton = document.querySelector('#randomHit');
-
 const TARGET = ['head', 'body', 'legs'];
 
 const TARGET_DAMAGE = {
@@ -129,17 +127,20 @@ function fight() {
 	const player1HP = $player1HPCount.innerText;
 	const player2HP = $player2HPCount.innerText;
 
-	// Check enemy defence
+	// Check enemy and player's defence, set damage to 0, if hit target is
+	// the same as defence target
 	if (playerAction.hitTarget === enemyAction.defenceTarget) {
 		generateFightLog('defence', player1, player2);
 		playerAction.damage = 0;
 	}
-	// Check player defence
 	if (enemyAction.hitTarget === playerAction.defenceTarget) {
 		generateFightLog('defence', player2, player1);
 		enemyAction.damage = 0;
 	}
 
+	// If draw conditions are fulfilled, execute draw, else
+	// continue getting damage until one of the players' HP is 0, then
+	// execute lose methods of objects to set a winner
 	if (player1HP - enemyAction.damage <= 0 && player2HP -
 		playerAction.damage <= 0) {
 
