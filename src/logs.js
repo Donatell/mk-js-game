@@ -1,4 +1,4 @@
-import { getRandom } from './functions.js';
+import { getRandomIndex } from './functions.js';
 import { player1, player2 } from './players.js';
 
 const $chat = document.querySelector('.chat');
@@ -48,7 +48,7 @@ function getTime() {
 	return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 }
 
-function generateResultLog(draw, player1Wins = undefined) {
+function generateResultLog(draw, player1Wins) {
 	let message;
 
 	if (!draw) {
@@ -61,12 +61,12 @@ function generateResultLog(draw, player1Wins = undefined) {
 				playerLose = player2.displayName;
 				break;
 			case false:
-				playerWins = player1.displayName;
-				playerLose = player2.displayName;
+				playerWins = player2.displayName;
+				playerLose = player1.displayName;
 				break;
 		}
 
-		message = logs['end'][getRandom(3) - 1]
+		message = logs['end'][getRandomIndex(logs['end'].length)]
 			.replace('[playerWins]', playerWins)
 			.replace('[playerLose]', playerLose);
 	} else {
@@ -78,7 +78,7 @@ function generateResultLog(draw, player1Wins = undefined) {
 }
 
 function generateFightLog(type, playerHit, playerDefence,
-                          damage = undefined) {
+                          damage) {
 	let message;
 	let logElement;
 
@@ -90,14 +90,14 @@ function generateFightLog(type, playerHit, playerDefence,
 			logElement = `<p>[${getTime()}] ${message}</p>`;
 			break;
 		case 'hit':
-			message = logs[type][getRandom(18) - 1]
+			message = logs[type][getRandomIndex(logs[type].length)]
 				.replace('[playerKick]', playerHit.displayName)
 				.replace('[playerDefence]', playerDefence.displayName);
 			logElement =
 				`<p>[${getTime()}] ${message} ${playerDefence.displayName} потерял ${damage} HP.</p>`;
 			break;
 		case 'defence':
-			message = logs[type][getRandom(8) - 1]
+			message = logs[type][getRandomIndex(logs[type].length)]
 				.replace('[playerKick]', playerHit.displayName)
 				.replace('[playerDefence]', playerDefence.displayName);
 			logElement =

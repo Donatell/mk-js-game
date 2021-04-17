@@ -16,6 +16,10 @@ function getRandom(max) {
 	return Math.floor(Math.random() * max) + 1;
 }
 
+function getRandomIndex(max) {
+	return Math.floor(Math.random() * max);
+}
+
 const createElement = (tag, className, innerText) => {
 	const $tag = document.createElement(tag);
 
@@ -121,7 +125,7 @@ function fight() {
 
 	const $player1HPCount = document.querySelector('.player1 .progressbar' +
 		' .hpcount');
-	const $player2HPCount = document.querySelector('.player1 .progressbar' +
+	const $player2HPCount = document.querySelector('.player2 .progressbar' +
 		' .hpcount');
 
 	const player1HP = $player1HPCount.innerText;
@@ -143,7 +147,6 @@ function fight() {
 	// execute lose methods of objects to set a winner
 	if (player1HP - enemyAction.damage <= 0 && player2HP -
 		playerAction.damage <= 0) {
-
 		player1.changeHP(enemyAction.damage);
 		player2.changeHP(playerAction.damage);
 
@@ -154,12 +157,10 @@ function fight() {
 	} else {
 		player2.getDamage(playerAction.damage);
 		if (playerAction.damage !== 0) {
+
 			generateFightLog('hit', player1, player2,
 				playerAction.damage);
-		}
-		if (player2.hp === 0) {
-			player2.handleLose();
-			generateResultLog(false, true);
+			console.log('if');
 		}
 
 		player1.getDamage(enemyAction.damage);
@@ -167,9 +168,13 @@ function fight() {
 			generateFightLog('hit', player2, player1,
 				enemyAction.damage);
 		}
+
 		if (player1.hp === 0) {
 			player1.handleLose();
 			generateResultLog(false, false);
+		} else if (player2.hp === 0) {
+			player2.handleLose();
+			generateResultLog(false, true);
 		}
 	}
 
@@ -181,6 +186,7 @@ export {
 	createReloadButton,
 	getRandom,
 	fight,
+	getRandomIndex,
 	$arenas,
 	$fightForm,
 	TARGET,
