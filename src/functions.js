@@ -12,9 +12,13 @@ const TARGET_DAMAGE = {
 	legs: 20
 };
 
-const getRandom = (max) => Math.floor(Math.random() * max) + 1;
+function getRandom(max) {
+	return Math.floor(Math.random() * max) + 1;
+}
 
-const getRandomIndex = max => Math.floor(Math.random() * max);
+function getRandomIndex(max) {
+	return Math.floor(Math.random() * max);
+}
 
 const createElement = (tag, className, innerText) => {
 	const $tag = document.createElement(tag);
