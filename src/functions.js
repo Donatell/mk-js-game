@@ -1,9 +1,8 @@
+import { generateFightLog, generateResultLog } from './logs.js';
 import { handleDraw, player1, player2 } from './players.js';
 
 const $arenas = document.querySelector('.arenas');
 const $fightForm = document.querySelector('.control');
-
-// const $randomButton = document.querySelector('#randomHit');
 
 const TARGET = ['head', 'body', 'legs'];
 
@@ -15,6 +14,10 @@ const TARGET_DAMAGE = {
 
 function getRandom(max) {
 	return Math.floor(Math.random() * max) + 1;
+}
+
+function getRandomIndex(max) {
+	return Math.floor(Math.random() * max);
 }
 
 const createElement = (tag, className, innerText) => {
@@ -92,7 +95,7 @@ function enemyAttack() {
 	};
 }
 
-function attack($fightForm) {
+function playerAttack() {
 	const playerAction = {};
 
 	// Read form input
@@ -113,42 +116,66 @@ function attack($fightForm) {
 		item.checked = false;
 	}
 
-	fight(playerAction);
+	return playerAction;
 }
 
-function fight(playerAction) {
+function fight() {
 	const enemyAction = enemyAttack();
+	const playerAction = playerAttack();
 
 	const $player1HPCount = document.querySelector('.player1 .progressbar' +
 		' .hpcount');
-	const $player2HPCount = document.querySelector('.player1 .progressbar' +
+	const $player2HPCount = document.querySelector('.player2 .progressbar' +
 		' .hpcount');
 
 	const player1HP = $player1HPCount.innerText;
 	const player2HP = $player2HPCount.innerText;
 
-	// Check enemy defence
+	// Check enemy and player's defence, set damage to 0, if hit target is
+	// the same as defence target
 	if (playerAction.hitTarget === enemyAction.defenceTarget) {
+		generateFightLog('defence', player1, player2);
 		playerAction.damage = 0;
 	}
-
-	// Check player defence
 	if (enemyAction.hitTarget === playerAction.defenceTarget) {
+		generateFightLog('defence', player2, player1);
 		enemyAction.damage = 0;
 	}
 
+	// If draw conditions are fulfilled, execute draw, else
+	// continue getting damage until one of the players' HP is 0, then
+	// execute lose methods of objects to set a winner
 	if (player1HP - enemyAction.damage <= 0 && player2HP -
 		playerAction.damage <= 0) {
-
 		player1.changeHP(enemyAction.damage);
 		player2.changeHP(playerAction.damage);
 
 		player1.renderHP();
 		player2.renderHP();
 		handleDraw();
+		generateResultLog(true);
 	} else {
 		player2.getDamage(playerAction.damage);
+		if (playerAction.damage !== 0) {
+
+			generateFightLog('hit', player1, player2,
+				playerAction.damage);
+			console.log('if');
+		}
+
 		player1.getDamage(enemyAction.damage);
+		if (enemyAction.damage !== 0) {
+			generateFightLog('hit', player2, player1,
+				enemyAction.damage);
+		}
+
+		if (player1.hp === 0) {
+			player1.handleLose();
+			generateResultLog(false, false);
+		} else if (player2.hp === 0) {
+			player2.handleLose();
+			generateResultLog(false, true);
+		}
 	}
 
 }
@@ -159,10 +186,9 @@ export {
 	createReloadButton,
 	getRandom,
 	fight,
-	attack,
+	getRandomIndex,
 	$arenas,
 	$fightForm,
 	TARGET,
 	TARGET_DAMAGE
-	// $randomButton
 };
