@@ -1,5 +1,5 @@
-import { getRandomIndex } from './functions.js';
-import { player1, player2 } from './players.js';
+import { player1, player2 } from '../main.js';
+import { getRandomIndex } from './utils.js';
 
 const $chat = document.querySelector('.chat');
 

@@ -1,20 +1,9 @@
+import { player1, player2 } from '../main.js';
 import { generateFightLog, generateResultLog } from './logs.js';
-import { handleDraw, player1, player2 } from './players.js';
+import { getRandom, TARGET, TARGET_DAMAGE } from './utils.js';
 
 const $arenas = document.querySelector('.arenas');
 const $fightForm = document.querySelector('.control');
-
-const TARGET = ['head', 'body', 'legs'];
-
-const TARGET_DAMAGE = {
-	head: 30,
-	body: 25,
-	legs: 20
-};
-
-const getRandom = max => Math.floor(Math.random() * max) + 1;
-
-const getRandomIndex = max => Math.floor(Math.random() * max);
 
 const createElement = (tag, className, innerText) => {
 	const $tag = document.createElement(tag);
@@ -41,40 +30,10 @@ function createReloadButton() {
 	$arenas.appendChild($reloadWrap);
 }
 
-const createPlayer = (player) => {
-	const $player = createElement('div', 'player' + player.player);
-	const $progressBar = createElement('div', 'progressbar');
-
-	const $hp = createElement('div', 'hp');
-	$hp.style.width = player.hp + '%';
-
-	const $hpcount = createElement('div', 'hpcount', player.hp);
-
-	const $name = createElement('div', 'name',
-		player.displayName.toUpperCase());
-
-	const $character = createElement('div', 'character');
-
-	const $image = createElement('img');
-	$image.src =
-		`https://reactmarathon-api.herokuapp.com/assets/${player.name}.gif`;
-
-	$progressBar.appendChild($hp);
-	$progressBar.appendChild($hpcount);
-	$progressBar.appendChild($name);
-
-	$character.appendChild($image);
-
-	$player.appendChild($progressBar);
-	$player.appendChild($character);
-
-	return $player;
-};
-
 const populateArena = (player1, player2) => {
 
-	const $player1 = createPlayer(player1);
-	const $player2 = createPlayer(player2);
+	const $player1 = player1.renderPlayer();
+	const $player2 = player2.renderPlayer();
 
 	$arenas.appendChild($player1);
 	$arenas.appendChild($player2);
@@ -113,6 +72,16 @@ function playerAttack() {
 	}
 
 	return playerAction;
+}
+
+function handleDraw() {
+	const $drawBanner = createElement('div', 'winBanner');
+	$drawBanner.innerText = 'draw';
+
+	$fightForm.style.display = 'none';
+	$arenas.appendChild($drawBanner);
+
+	createReloadButton();
 }
 
 function fight() {
@@ -180,11 +149,7 @@ export {
 	populateArena,
 	createElement,
 	createReloadButton,
-	getRandom,
 	fight,
-	getRandomIndex,
 	$arenas,
-	$fightForm,
-	TARGET,
-	TARGET_DAMAGE
+	$fightForm
 };
