@@ -1,21 +1,10 @@
-import { $fightForm, fight, populateArena } from './src/functions.js';
-import { generateFightLog } from './src/logs.js';
-import { player1, player2 } from './src/players.js';
+import { Game } from './src/game.js';
 
-populateArena(player1, player2);
+const game = new Game();
 
-generateFightLog('start', player1, player2);
+game.start();
 
-$fightForm.addEventListener('submit', (e) => {
+game.$fightForm.addEventListener('submit', (e) => {
 	e.preventDefault();
-	fight();
+	game.fight();
 });
-
-// $randomButton.addEventListener('click', () => {
-// 	const targetPlayerNumber = Math.floor(Math.random() * 2) + 1;
-// 	const damage = Math.floor(Math.random() * 20) + 1;
-//
-// 	const player = targetPlayerNumber === 1 ? player1 : player2;
-//
-// 	player.getDamage(damage);
-// });
