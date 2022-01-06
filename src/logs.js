@@ -3,43 +3,43 @@ export class Logs {
 	player2;
 	$chat;
 	logs = {
-		start: '[player1] и [player2] бросили вызов друг другу.',
+		start: '[player1] and [player2] challenge each other.',
 		end: [
-			'Результат удара [playerWins]: [playerLose] - труп',
-			'[playerLose] погиб от удара бойца [playerWins]',
-			'Результат боя: [playerLose] - жертва, [playerWins] - убийца'
+			'Result of [playerWins] hit: [playerLose] is dead,
+			'[playerLose] was killed by [playerWins],
+			'[result of fight: [playerLose] - victim, [playerWins] - assassin.
 		],
 		hit: [
-			'[playerDefence] пытался сконцентрироваться, но [playerKick] разбежавшись раздробил копчиком левое ухо врага.',
-			'[playerDefence] расстроился, как вдруг, неожиданно [playerKick] случайно раздробил грудью грудину противника.',
-			'[playerDefence] зажмурился, а в это время [playerKick], прослезившись, раздробил кулаком пах оппонента.',
-			'[playerDefence] чесал <вырезано цензурой>, и внезапно неустрашимый [playerKick] отчаянно размозжил грудью левый бицепс оппонента.',
-			'[playerDefence] задумался, но внезапно [playerKick] случайно влепил грубый удар копчиком в пояс оппонента.',
-			'[playerDefence] ковырялся в зубах, но [playerKick] проснувшись влепил тяжелый удар пальцем в кадык врага.',
-			'[playerDefence] вспомнил что-то важное, но внезапно [playerKick] зевнув, размозжил открытой ладонью челюсть противника.',
-			'[playerDefence] осмотрелся, и в это время [playerKick] мимоходом раздробил стопой аппендикс соперника.',
-			'[playerDefence] кашлянул, но внезапно [playerKick] показав палец, размозжил пальцем грудь соперника.',
-			'[playerDefence] пытался что-то сказать, а жестокий [playerKick] проснувшись размозжил копчиком левую ногу противника.',
-			'[playerDefence] забылся, как внезапно безумный [playerKick] со скуки, влепил удар коленом в левый бок соперника.',
-			'[playerDefence] поперхнулся, а за это [playerKick] мимоходом раздробил коленом висок врага.',
-			'[playerDefence] расстроился, а в это время наглый [playerKick] пошатнувшись размозжил копчиком губы оппонента.',
-			'[playerDefence] осмотрелся, но внезапно [playerKick] робко размозжил коленом левый глаз противника.',
-			'[playerDefence] осмотрелся, а [playerKick] вломил дробящий удар плечом, пробив блок, куда обычно не бьют оппонента.',
-			'[playerDefence] ковырялся в зубах, как вдруг, неожиданно [playerKick] отчаянно размозжил плечом мышцы пресса оппонента.',
-			'[playerDefence] пришел в себя, и в это время [playerKick] провел разбивающий удар кистью руки, пробив блок, в голень противника.',
-			'[playerDefence] пошатнулся, а в это время [playerKick] хихикая влепил грубый удар открытой ладонью по бедрам врага.'
+			"[playerDefence] tried to concentrate, but [playerKick] sprawled and crushed the enemy's left ear with his tailbone."
+			"[playerDefence] was getting frustrated when suddenly, unexpectedly, [playerKick] accidentally crushed his opponent's sternum with his chest."
+			"[playerDefence] clenched his eyes, while [playerKick], in a blink, shattered his opponent's groin with his fist."
+			"[playerDefence] was scratching <censored>, and suddenly the undaunted [playerKick] desperately smashed his opponent's left bicep with his chest."
+			"[playerDefence] hesitated, but suddenly [playerKick] accidentally slammed a brutal kick to his opponent's waist with his tailbone."
+			"[playerDefence] was picking his teeth, but [playerKick] woke up and slammed a heavy finger punch into his opponent's Adam's apple."
+			"[playerDefence] remembered something important, but suddenly [playerKick] yawned and smashed his opponent's jaw with an open palm."
+			"[playerDefence] looked around, at which time [playerKick] crushed his opponent's appendix with his foot in passing."
+			"[playerDefence] coughed, but suddenly [playerKick] showed his finger and smashed his opponent's chest with his finger."
+			"[playerDefence] tried to say something, and the brutal [playerKick] woke up and smashed his opponent's left leg with his tailbone."
+			"[playerDefence] was oblivious, as the suddenly insane [playerKick], out of boredom, slammed his knee into his opponent's left side."
+			"[playerDefence] choked, and for that [playerKick] crushed his enemy's temple with his knee in passing."
+			"[playerDefence] got frustrated, and in the meantime the insolent [playerKick] staggered to smash his opponent's lips with his tailbone."
+			"[playerDefence] looked around, but suddenly [playerKick] timidly smashed his opponent's left eye with his knee."
+			"[playerDefence] looked around, but [playerKick] broke into a crushing shoulder strike, punching a block where you wouldn't normally hit your opponent."
+			"[playerDefence] was picking his teeth when suddenly, unexpectedly, [playerKick] desperately smashed his opponent's abs muscle with his shoulder."
+			"[playerDefence] came to his senses, at which time [playerKick] delivered a smashing hand strike, punching a block, into his opponent's shin."
+			"[playerDefence] staggered back, while [playerKick] giggled and slammed a rough open palm strike into his opponent's thighs."
 		],
 		defence: [
-			'[playerKick] потерял момент и храбрый [playerDefence] отпрыгнул от удара открытой ладонью в ключицу.',
-			'[playerKick] не контролировал ситуацию, и потому [playerDefence] поставил блок на удар пяткой в правую грудь.',
-			'[playerKick] потерял момент и [playerDefence] поставил блок на удар коленом по селезенке.',
-			'[playerKick] поскользнулся и задумчивый [playerDefence] поставил блок на тычок головой в бровь.',
-			'[playerKick] старался провести удар, но непобедимый [playerDefence] ушел в сторону от удара копчиком прямо в пятку.',
-			'[playerKick] обманулся и жестокий [playerDefence] блокировал удар стопой в солнечное сплетение.',
-			'[playerKick] не думал о бое, потому расстроенный [playerDefence] отпрыгнул от удара кулаком куда обычно не бьют.',
-			'[playerKick] обманулся и жестокий [playerDefence] блокировал удар стопой в солнечное сплетение.'
+			"[playerKick] lost his momentum and the brave [playerDefence] jumped away from the open palm strike to his collarbone."
+			"[playerKick] was not in control of the situation, so [playerDefence] put a block on the heel strike to his right chest."
+			"[playerKick] lost momentum and [playerDefence] put a block on the knee to the spleen."
+			"[playerKick] slipped and a thoughtful [playerDefence] put a block on a head poke to the eyebrow."
+			"[playerKick] tried to take a punch, but the undefeated [playerDefence] sidestepped a tailbone kick right on the heel."
+			"[playerKick] cheated and the brutal [playerDefence] blocked a foot strike to the solar plexus."
+			"[playerKick] wasn't thinking about the fight, so a frustrated [playerDefence] jumped away from the fist punch where you don't usually get hit."
+			"[playerKick] cheated and the brutal [playerDefence] blocked a foot strike to the solar plexus."
 		],
-		draw: 'Ничья - это тоже победа!'
+		draw: "A draw is also a win!"
 	};
 
 	constructor(player1, player2) {
