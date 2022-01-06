@@ -5,9 +5,9 @@ export class Logs {
 	logs = {
 		start: '[player1] and [player2] challenge each other.',
 		end: [
-			'Result of [playerWins] hit: [playerLose] is dead,
-			'[playerLose] was killed by [playerWins],
-			'[result of fight: [playerLose] - victim, [playerWins] - assassin.
+			'Result of [playerWins] hit: [playerLose] is dead',
+			'[playerLose] was killed by [playerWins]',
+			'[result of fight: [playerLose] - victim, [playerWins] - assassin'.
 		],
 		hit: [
 			"[playerDefence] tried to concentrate, but [playerKick] sprawled and crushed the enemy's left ear with his tailbone."
@@ -105,7 +105,7 @@ export class Logs {
 						.replace('[playerKick]', playerHit.displayName)
 						.replace('[playerDefence]', playerDefence.displayName);
 				logElement =
-					`<p>[${this.getTime()}] ${message} ${playerDefence.displayName} потерял ${damage} HP.</p>`;
+					`<p>[${this.getTime()}] ${message} ${playerDefence.displayName} lost ${damage} HP.</p>`;
 				break;
 			case 'defence':
 				message =
