@@ -7,7 +7,7 @@ export class Logs {
 		end: [
 			'Result of [playerWins] hit: [playerLose] is dead',
 			'[playerLose] was killed by [playerWins]',
-			'[result of fight: [playerLose] - victim, [playerWins] - assassin'.
+			'[result of fight: [playerLose] - victim, [playerWins] - assassin.'
 		],
 		hit: [
 			"[playerDefence] tried to concentrate, but [playerKick] sprawled and crushed the enemy's left ear with his tailbone."
