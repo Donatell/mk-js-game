@@ -3,4 +3,6 @@
 
 Dieses Projekt ist ein einfaches browserbasiertes JavaScript-Spiel. Das Projekt verwendet die Version ES6+, einschließlich Modularität und Pfeilfunktionen für die Bequemlichkeit der Entwicklung.
 
+Das Projekt wurde im Rahmen eines JavaScript-Marathons entwickelt.
+
 Das Projekt wird auf Github gehostet: [Link](https://donatell.github.io/mk-js-game/)
